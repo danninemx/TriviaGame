@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>World Geography Trivia</title>
+
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <div class="main-header">
+        <h1 id="title">Trivia!</h1>
+      </div>
+
+      <div id="timer">
+        <p id="remaining">
+          Time Remaining: <span id="countdown">0</span> Seconds
+        </p>
+      </div>
+
+      <div id="question-display">
+        <h3 id="question">question 1</h3>
+      </div>
+
+      <!-- Buttons for answer entry -->
+      <div id="buttons">
+        <button class="select" id="choice1">choice 1</button><br />
+        <button class="select" id="choice2">choice 2</button><br />
+        <button class="select" id="choice3">choice 3</button><br />
+        <button class="select" id="choice4">choice 4</button><br />
+      </div>
+
+      <button id="myBtn">Open Modal</button>
+
+      <!-- Display feedback in modal -->
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Some text in the Modal..</p>
+      </div>
+  
+  </div>
+
+    <!-- jQuery -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"
+    ></script>
+
+    <!-- Script -->
+    <script type="text/javascript" src="./assets/javascript/quiz.js"></script>
+  </body>
+</html>
