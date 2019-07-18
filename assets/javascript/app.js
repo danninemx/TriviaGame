@@ -5,6 +5,14 @@ var answerKey = [];
 $(document).ready(function () {
 
 
+    /* EVENT HANDLERS */
+
+    // Call this when choice button is clicked.
+    $(".select").click(function () {
+
+    });
+
+
     // Get the modal
     var modal = document.getElementById("myModal");
 
