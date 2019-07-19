@@ -1,5 +1,5 @@
 /* GLOBAL VARIABLES */
-var qa = { // Key is question #; value is correct answer #.
+var qa = { // 'Array-like' object. Key is question #; value is correct answer #.
     0: { q: "Master Chief is the hero of which game franchise?", c1: "Halo", c2: "ARMA", c3: "Doom", c4: "Gears of War", a: 1 },
     1: { q: "Which game was inspired by the WarCraft lore?", c1: "StarCraft", c2: "Hearthstone", c3: "WarHammer 2000", c4: "Golden Axe", a: 2 },
     2: { q: "Hero of which game does not speak once in the game?", c1: "Super Mario 64", c2: "Sonic the Hedgehog 2006", c3: "", c4: "Grand Theft Auto 3", a: 4 },
@@ -28,6 +28,7 @@ var span = document.getElementsByClassName("close")[0]; // Get the <span> elemen
 var clockRunning = false; // This prevents excessively timer speedup.
 var timerId; // This will hold setTimeout.
 var time; // # of seconds left on the timer.
+var current = 0; // This keeps track of question #.
 
 var correct = 0;
 var incorrect = 0;
@@ -57,6 +58,17 @@ function pause() {
 
 // Call this to progress to next question.
 function next() {
+    current++; // Next question number.
+
+    // Update displays in DOM.
+    $('#question').text(qa[current]['q']);
+    Object.keys(qa).forEach(function (key) { // Loop through object keys.
+
+        for (let i = 1; i <= 4; i++) { // Loop to update 4 button texts.
+            $('#' + i).text(qa[current]["c" + i]);
+        }
+
+    });
 
 }; // End next function.
 
@@ -75,11 +87,6 @@ $(document).ready(function () {
 
     // Call this when choice button is clicked.
     $(".select").click(function () {
-
-
-        // Update displays in DOM
-
-
 
         // When the user clicks a choice button, open the modal 
         modal.style.display = "block";
