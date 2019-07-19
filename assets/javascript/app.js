@@ -1,15 +1,17 @@
 /* GLOBAL VARIABLES */
 var qa = { // Key is question #; value is correct answer #.
-    0: { q: "The Masterchief is the hero of which game franchise?", c1: "Halo", c2: "Pokemon", c3: "Donkey Kong", c4: "A.R.M.A." },
-    1: 3,
-    2: 1,
-    3: 1,
-    4: 4,
-    5: 3,
-    6: 1,
-    7: 1,
-    8: 1,
-    9: 1
+    0: { q: "Master Chief is the hero of which game franchise?", c1: "Halo", c2: "ARMA", c3: "Doom", c4: "Gears of War", a: 1 },
+    1: { q: "Which game was inspired by the WarCraft lore?", c1: "StarCraft", c2: "Hearthstone", c3: "WarHammer 2000", c4: "Golden Axe", a: 2 },
+    2: { q: "Hero of which game does not speak once in the game?", c1: "Super Mario 64", c2: "Sonic the Hedgehog 2006", c3: "", c4: "Grand Theft Auto 3", a: 4 },
+    3: { q: "In which game can you NOT attack enemies by 'stomping'?", c1: "Super Mario Bros", c2: "Sonic the Hedgehog", c3: "Mega Man X", c4: "Duck Tales", a: 3 },
+    4: { q: "Which of the following is not of the fighting game genre?", c1: "God of War", c2: "M.U.G.E.N", c3: "Tekken", c4: "Dead or Alive", a: 1 },
+    /*
+        5: { q: "", c1: "", c2: "", c3: "", c4: "", a: 1 },
+        6: { q: "", c1: "", c2: "", c3: "", c4: "", a: 1 },
+        7: { q: "", c1: "", c2: "", c3: "", c4: "", a: 1 },
+        8: { q: "", c1: "", c2: "", c3: "", c4: "", a: 1 },
+        9: { q: "", c1: "", c2: "", c3: "", c4: "", a: 1 } 
+        */
 };
 
 //----------------//
@@ -34,21 +36,29 @@ var incorrect = 0;
 //----------------//
 //    Functions   //
 //----------------//
-function start() { // Call this to start timer.
+
+// Call this to start timer.
+function start() {
     if (!clockRunning) {
         clockRunning = true;
         timerId = setTimeout(function () {
             count();
         }, 1000);
     }
-};
+}; // End start function.
 
-// Call this to 
-function pause() { // Call this pause timer.
+
+// Call this to pause timer.
+function pause() {
     clearInterval(intervalId);
     clockRunning = false;
-};
+}; // End pause function.
 
+
+// Call this to progress to next question.
+function next() {
+
+}; // End next function.
 
 
 $(document).ready(function () {
