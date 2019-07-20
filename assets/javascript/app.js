@@ -23,7 +23,8 @@ var btn3 = document.getElementById("3");
 var btn4 = document.getElementById("4");
 
 var modal = document.getElementById("myModal"); //  the modal
-var span = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
+var close = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
+var eval = document.getElementsByClassName("modal-title"); // Answer evaluation display
 
 var clockRunning = false; // This prevents excessively timer speedup.
 var timerId; // This will hold setTimeout.
@@ -42,19 +43,19 @@ var incorrect = 0;
 function start() {
     if (!clockRunning) {
         clockRunning = true;
-        timerId = setTimeout(function () { // Call count function every 1 sec.
-            //count();
-            time = time - 1;
-            $('#countdown').text(time);
+        timerId = setInterval(function () { // Count down every 1 sec.
+            if (time > 0) { // If time remains, count down.
+                time = time - 1;
+                $('#countdown').text(time);
+            }
+            else { // If time is up, show answer.
+                showAnswer();
+            }
         }, 1000);
     }
 }; // End start function.
-/*
-// Call this to count down 1 second from timer.
-function count() {
-    time = time - 1;
-}
-*/
+
+
 // Call this to pause timer.
 function pause() {
     clearInterval(timerId);
@@ -64,7 +65,7 @@ function pause() {
 
 // Call this to reset timer.
 function reset() {
-    time = 10;
+    time = 2;
     $('#countdown').text(time);
 }; // End reset function.
 
@@ -73,7 +74,6 @@ function reset() {
 function next() {
     current++; // Next question number.
 
-    // Update displays in DOM.
     $('#question').text(qa[current]['q']); // Update question text.
 
     Object.keys(qa).forEach(function (key) { // Loop through qa keys.
@@ -83,9 +83,19 @@ function next() {
         } // End loop for button update.
 
     }); // End loop thru object keys.
+    reset(); // Reset timer.
     start(); // Resume timer.
 
 }; // End next function.
+
+
+// Call this to pause and show answer.
+function showAnswer(num) {
+    pause(); // Stop timer while modal is on.
+    modal.style.display = "block"; // Open the answer modal.
+
+    current;
+}
 
 
 $(document).ready(function () {
@@ -98,24 +108,28 @@ $(document).ready(function () {
     $('#startGame').click(function () {
         $('#ingame').css('display', 'block');
         $(this).css('display', 'none');
+        next();
     });
 
     // Call this when choice button is clicked.
     $(".select").click(function () {
-        pause(); // Stop timer while modal is on.
-        // When the user clicks a choice button, open the modal 
-        modal.style.display = "block";
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
-            modal.style.display = "none";
-        }
+        //console.log(this.id); // check if id is gotten
+        showAnswer();
     });
 
-    // When the user clicks anywhere outside of the modal, close it
+
+    // When the user clicks on <span> (x), close the modal.
+    close.onclick = function () {
+        modal.style.display = "none";
+        next();
+    }
+
+
+    // When the user clicks anywhere outside of the modal, close it and advance to next trivia.
     window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = "none";
+            next();
         }
     }
 
@@ -123,3 +137,10 @@ $(document).ready(function () {
 
 
 });
+
+/*
+References
+
+Enumerating through object
+https://stackoverflow.com/questions/921789/how-to-loop-through-a-plain-javascript-object-with-the-objects-as-members
+*/
