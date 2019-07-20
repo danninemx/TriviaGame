@@ -37,80 +37,83 @@ var correct = 0;
 var incorrect = 0;
 
 
-//----------------//
-//    Functions   //
-//----------------//
-
-// Call this to start timer.
-function start() {
-    if (!clockRunning) {
-        clockRunning = true;
-        timerId = setInterval(function () { // Count down every 1 sec.
-            if (time > 0) { // If time remains, count down.
-                time = time - 1;
-                $('#countdown').text(time);
-            }
-            else { // If time is up, show answer.
-                showAnswer();
-            }
-        }, 1000);
-    }
-}; // End start function.
-
-
-// Call this to pause timer.
-function pause() {
-    clearInterval(timerId);
-    clockRunning = false;
-}; // End pause function.
-
-
-// Call this to reset timer.
-function reset() {
-    time = 2;
-    $('#countdown').text(time);
-}; // End reset function.
-
-
-// Call this to progress to next question.
-function next() {
-    current++; // Next question number.
-
-    $('#question').text(qa[current]['q']); // Update question text.
-
-    Object.keys(qa).forEach(function (key) { // Loop through qa keys.
-
-        for (let i = 1; i <= 4; i++) { // Loop to update 4 button texts.
-            $('#' + i).text(qa[current]["c" + i]);
-        } // End loop for button update.
-
-    }); // End loop thru object keys.
-    reset(); // Reset timer.
-    start(); // Resume timer.
-
-}; // End next function.
-
-
-// Call this to pause and show answer.
-function showAnswer(ansNum) {
-    pause(); // Stop timer while modal is on.
-    modal.style.display = "block"; // Open the answer modal.
-
-    var corr = qa[current]['a']; // Check qa for correct answer #.
-    //    console.log("corr is " + corr); // correct answer key checker
-
-    if (ansNum === corr) { // Evaluate pressed button id vs answer # & update display.
-        $(eval).text('Correct!');
-    } else if (time = 0) {
-        $(eval).text("Time's up!");
-    } else { $(eval).text('Wrong...') }; // This condition includes (ansNum === undefined).
-
-    $(pic).attr('src', qa[current]['u']); // Update img src.
-    $(desc).text(qa[current]['exp']); // Update explanation.
-}
-
 
 $(document).ready(function () {
+
+    //----------------//
+    //    Functions   //
+    //----------------//
+
+    // Call this to start timer.
+    function start() {
+        if (!clockRunning) {
+            clockRunning = true;
+            timerId = setInterval(function () { // Count down every 1 sec.
+                if (time > 0) { // If time remains, count down.
+                    time = time - 1;
+                    $('#countdown').text(time);
+                }
+                else { // If time is up, show answer.
+                    showAnswer();
+                }
+            }, 1000);
+        }
+    }; // End start function.
+
+
+    // Call this to pause timer.
+    function pause() {
+        clearInterval(timerId);
+        clockRunning = false;
+    }; // End pause function.
+
+
+    // Call this to reset timer.
+    function reset() {
+        time = 2;
+        $('#countdown').text(time);
+    }; // End reset function.
+
+
+    // Call this to progress to next question.
+    function next() {
+        current++; // Next question number.
+
+        $('#question').text(qa[current]['q']); // Update question text.
+
+        Object.keys(qa).forEach(function (key) { // Loop through qa keys.
+
+            for (let i = 1; i <= 4; i++) { // Loop to update 4 button texts.
+                $('#' + i).text(qa[current]["c" + i]);
+            } // End loop for button update.
+
+        }); // End loop thru object keys.
+        reset(); // Reset timer.
+        start(); // Resume timer.
+
+    }; // End next function.
+
+
+    // Call this to pause and show answer.
+    function showAnswer(ansNum) {
+        pause(); // Stop timer while modal is on.
+        modal.style.display = "block"; // Open the answer modal.
+
+        var corr = qa[current]['a']; // Check qa for correct answer #.
+        //console.log("pressed btn #" + ansNum + " and type is " + (typeof ansNum));
+        //console.log("corr is " + corr + " and type is " + (typeof corr)); // correct answer key checker
+        debugger;
+        if (parseInt(ansNum) === corr) { // Turn button id to int, compare vs answer #, then display.
+            $(eval).text('Correct!');
+        } else if (time = 0) {
+            $(eval).text("Time's up!");
+        } else { $(eval).text('Wrong...') }; // This condition includes (ansNum === undefined).
+
+        $(pic).attr('src', qa[current]['u']); // Update img src.
+        $(desc).text(qa[current]['exp']); // Update explanation.
+    };
+
+
 
     //----------------//
     // EVENT HANDLERS //
@@ -144,9 +147,6 @@ $(document).ready(function () {
             next();
         }
     }
-
-
-
 
 });
 
