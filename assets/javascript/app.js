@@ -15,6 +15,15 @@ var qa = { // 'Array-like' object. Key is question #; value is correct answer #.
         */
 };
 
+var assess = {
+    0: { as: "You are what they call a 'n00b'. (Yes, it is spelled with zeroes.)  It's okay - you don't know games but at least you have real friends... right?  RIGHT???", u: "https://media.giphy.com/media/YLgIOmtIMUACY/giphy.gif" },
+    1: { as: "Hardly a gamer. Stick to your Candy Crush, my friend...", u: "http://66.media.tumblr.com/f5137339a16ed43cd0f983fc9bb66750/tumblr_mgvwgbX95Y1s2gj18o1_r2_500.gif" },
+    2: { as: "You're a casual gamer, but take heart! A few overnight gaming sessions should get you there.", u: "http://66.media.tumblr.com/f5137339a16ed43cd0f983fc9bb66750/tumblr_mgvwgbX95Y1s2gj18o1_r2_500.gif" },
+    3: { as: "I see you've twirled a fair share of joysticks before. You maintain a good game-life balance. ", u: "https://media.giphy.com/media/wPVThWJ0EX9oA/giphy.gif" },
+    4: { as: "So close to perfection.  You've proven yourself a gamer.  Congratulations! Now go relax your eyes.", u: "https://media.giphy.com/media/y0NFayaBeiWEU/giphy.gif" },
+    5: { as: "ALL HAIL GAMING KING! You're so good at this that South Koreans are prepping your honorary citizenship. Now go open a window or something, you total otaku.", u: "https://media.giphy.com/media/3o7WTDhY6SMw36LWve/giphy.gif" }
+};
+
 var clockRunning = false; // This prevents excessively timer speedup.
 var timerId; // This will hold setTimeout.
 var time; // # of seconds left on the timer.
@@ -78,21 +87,23 @@ $(document).ready(function () {
     }; // End reset function.
 
 
-    // Call this to progress to next question.
+    // Call this to progress to next question. If n/a, call summary.
     function next() {
         current++; // Next question number.
 
-        $('#question').text(qa[current]['q']); // Update question text.
+        if (current <= Object.keys(qa).length) { // If other questions remain...
+            $('#question').text(qa[current]['q']); // Update question text.
 
-        Object.keys(qa).forEach(function (key) { // Loop through qa keys.
+            Object.keys(qa).forEach(function (key) { // Loop through qa keys.
 
-            for (let i = 1; i <= 4; i++) { // Loop to update 4 button texts.
-                $('#' + i).text(qa[current]["c" + i]);
-            } // End loop for button update.
+                for (let i = 1; i <= 4; i++) { // Loop to update 4 button texts.
+                    $('#' + i).text(qa[current]["c" + i]);
+                } // End loop for button update.
 
-        }); // End loop thru object keys.
-        reset(); // Reset timer.
-        start(); // Resume timer.
+            }); // End loop thru object keys.
+            reset(); // Reset timer.
+            start(); // Resume timer.
+        } else { summary() }; // If out of questions, summarize results.
 
     }; // End next function.
 
@@ -104,6 +115,7 @@ $(document).ready(function () {
 
         var corr = qa[current]['a']; // Check correct answer # for current question.
         if (parseInt(ansNum) === corr) { // Turn button id to int, compare vs answer #, update display if correct.
+            correct++;
             $(eval).text('Correct!');
         } else if (time === 0) {
             $(eval).text("Time's up!");
@@ -116,7 +128,14 @@ $(document).ready(function () {
 
     // Call this to summarize game result.
     function summary() {
-        //    $(eval).
+        $(eval).text('You got ' + correct + ' out of ' + Object.keys(qa).length + 'questions.');
+
+        var rank = Math.floor(correct / (Object.keys(qa).length)) / 2; // Rank user on 0-5 scale.
+
+        $(pic).attr('src', assess[rank].u); // Update display using assess object.
+        $(desc).text(assess[rank].as);
+
+        $(resBtn).attr('display', 'block'); // Unhide restart button
     };
 
 
