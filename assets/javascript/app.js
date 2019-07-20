@@ -44,6 +44,7 @@ var modal = document.getElementById("myModal"); //  the modal
 var close = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
 var eval = document.getElementById("modal-title"); // Answer evaluation display
 var pic = document.getElementById("picture"); // Picture for answer key
+var modalCount = document.getElementById("modal-countdown"); // Span showing seconds left on modal timer
 var desc = document.getElementById("explanation"); // Explanation of answer
 var resBtn = document.getElementById("restart"); // Restart button
 
@@ -120,20 +121,27 @@ $(document).ready(function () {
         $(desc).text(qa[current]['exp']); // Update explanation.
 
         // Auto-close explanation modal with timer.
-        var modalTime = 15;
-        modaltimerId = setInterval(function () {
-            if (modalTime > 0) { // If time remains, count down.
+        var modalTime = 3;
+        if (modal.style.display === 'block') {
+            debugger;
+            modaltimerId = setInterval(function () {
                 modalTime -= 1;
-                $('#countdown').text(time);
-            }
-            else { showAnswer() }; // If time is up, show answer.
-        }, 1000);
+                $('#modal-countdown').text(modalTime);
+                if (modalTime === 0) { // If modal timer is up, remove interval, close modal & next.
+                    clearInterval(modaltimerId);
+                    modal.style.display = 'none';
+                    next();
+                }
+            }, 1000);
+        }
+
 
     }; // End showAnswer function.
 
 
     // Call this to summarize game results.
     function summary() {
+        $('#remaining').style.display = 'none'; // Hide modal timer.
         $(eval).text('You got ' + correct + ' out of ' + Object.keys(qa).length + ' questions.');
         var rank = Math.floor(correct / (Object.keys(qa).length) * 5); // Rank user on 0-5 scale.
 
@@ -166,6 +174,7 @@ $(document).ready(function () {
     $(resBtn).click(function () {
         resBtn.style.display = 'none'; // Hide button
         modal.style.display = 'none'; // Hide modal
+        $('#remaining').style.display = 'block'; // Un-hide modal timer
         current = 0;
         time = 10;
         correct = 0;
