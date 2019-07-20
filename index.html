@@ -19,7 +19,7 @@
         <button id="startGame">Start Game</button>
       </div>
       
-  <div id="ingame">
+    <div id="ingame">
         <div id="timer">
           <p id="remaining">
             Time Remaining: <span id="countdown">0</span> Seconds
@@ -38,7 +38,7 @@
           <button class="select" id="4">choice 4</button><br />
         </div>
 
-<!--        <button id="myBtn">Open Modal</button> -->
+          <!-- <button id="myBtn">Open Modal</button> -->
 
         <!-- Display feedback in modal -->
 
@@ -48,13 +48,18 @@
         <div class="modal-content">
             
             <div class="modal-header">
-              <h4 id="modal-title">Correct or Wrong?</h4>
+              <h4 id="modal-title"></h4>
+              <div id="modal-timer">
+                  <p id="remaining">
+                    Closing in: <span id="modal-countdown">15</span> Seconds
+                  </p>
+                </div> <!--end modal-timer-->        
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
 
             <div class="modal-body">
               <img id="picture" src="https://media.giphy.com/media/f7rDDvcOV9n8I/giphy.gif" style="width:100%;height:100%;">
-              <p id="explanation">Some text in the Modal..</p>
+              <p id="explanation"></p>
             </div>
             
             <div class="modal-footer">
@@ -62,11 +67,11 @@
               <button type="button" class="btn btn-default" id="restart">Restart Game</button>
             </div>
 
-<!--          <span class="close">&times;</span>-->
-        </div>
+            <!-- <span class="close">&times;</span> -->
+        </div> <!-- End modal content -->
     
-    </div>
-  </div> 
+    </div> <!-- End the modal -->
+  </div> <!-- End ingame -->
 
     <!-- jQuery -->
     <script

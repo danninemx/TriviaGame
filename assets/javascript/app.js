@@ -25,7 +25,8 @@ var assess = {
 };
 
 var clockRunning = false; // Prevents excessive timer speedup.
-var timerId; // Holds setTimeout.
+var timerId; // Holds setInterval for Q&A.
+var modaltimerId; // Holds setInterval for modal.
 var time; // # of seconds left on timer.
 var current = 0; // Current question #.
 var correct = 0; // # of correct answers.
@@ -117,6 +118,17 @@ $(document).ready(function () {
 
         $(pic).attr('src', qa[current]['u']); // Update img src.
         $(desc).text(qa[current]['exp']); // Update explanation.
+
+        // Auto-close explanation modal with timer.
+        var modalTime = 15;
+        modaltimerId = setInterval(function () {
+            if (modalTime > 0) { // If time remains, count down.
+                modalTime -= 1;
+                $('#countdown').text(time);
+            }
+            else { showAnswer() }; // If time is up, show answer.
+        }, 1000);
+
     }; // End showAnswer function.
 
 
@@ -182,10 +194,12 @@ $(document).ready(function () {
 Improvements planned
 - Implement setTimeout auto-close on evaluate view.
 - Adjust size of close button on evaluate view. Too wide.
-- Apply more styling. (background image, button animation on hover, Bootstrap progress bar, modal too low on desktop view, )
+- Apply more styling. (background image, button animation on hover, Bootstrap progress bar, modal too low on desktop view, modal animation)
 - Hide modal close box in summary view. Maybe even ignore all modal close attempts on click event level.
 - Add more trivia Q&A.
 - Consider adopting BS jumbotron or carousel for display.
+- Make view responsive. Not great on small sizes.
+- Add Readme.md
 - Impose synchronousity in gif loading.
 
 -----------
@@ -193,4 +207,5 @@ References
 
 Enumerating through object
 https://stackoverflow.com/questions/921789/how-to-loop-through-a-plain-javascript-object-with-the-objects-as-members
+https://stackoverflow.com/questions/684672/how-do-i-loop-through-or-enumerate-a-javascript-object
 */
