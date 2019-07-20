@@ -4,9 +4,9 @@
 var qa = { // 'Array-like' object. Key is question #; value is correct answer #.
     1: { q: "Master Chief is the hero of which game franchise?", c1: "Halo", c2: "ARMA", c3: "Doom", c4: "Gears of War", a: 1, exp: "Hail to the Chief!", u: "https://static.comicvine.com/uploads/original/11111/111118857/4086055-3738604848-40860.gif" },
     2: { q: "Which game was inspired by the WarCraft lore?", c1: "StarCraft", c2: "Hearthstone", c3: "WarHammer 2000", c4: "Golden Axe", a: 2, exp: "WarCraft lore had spawned multiple WarCraft games, an MMO as well as board games such as Hearthstone.", u: "https://media.giphy.com/media/mqovvJMv4gf1C/giphy.gif" },
-    3: { q: "Hero of which game does not speak once in the game?", c1: "Super Mario 64", c2: "Sonic the Hedgehog 2006", c3: "", c4: "Grand Theft Auto 3", a: 4, exp: "GTA3 is famous for its silent, nameless protagonist. Poor 'guy'.", u: "https://thegtaplace.com/images/gta3/screenshots/xbox/full_gta3_01.jpg" },
+    3: { q: "Hero of which game does not speak once in the game?", c1: "Super Mario 64", c2: "Sonic the Hedgehog 2006", c3: "Hitman 2: Silent Assassin", c4: "Grand Theft Auto 3", a: 4, exp: "GTA3 is famous for its silent, nameless protagonist. Poor 'guy'.", u: "https://thegtaplace.com/images/gta3/screenshots/xbox/full_gta3_01.jpg" },
     4: { q: "In which game can you NOT attack enemies by 'stomping'?", c1: "Super Mario Bros", c2: "Sonic the Hedgehog", c3: "Mega Man X", c4: "Duck Tales", a: 3, exp: "There's a reason Mega Man has a blaster for an arm!", u: "https://media.giphy.com/media/YRshqyFl4ya5lZbDnM/giphy.gif" },
-    5: { q: "Which of the following is not of the fighting game genre?", c1: "God of War", c2: "M.U.G.E.N", c3: "Tekken", c4: "Dead or Alive", a: 1, exp: "While 'God of War' has a few fighting game-style moments, but it is of the action-adventure, hack-and-slash genre.", u: "https://i.imgur.com/0Iu1aqf.gif" }
+    5: { q: "Which of the following is not of the fighting game genre?", c1: "God of War", c2: "M.U.G.E.N", c3: "Tekken", c4: "Dead or Alive", a: 1, exp: "While 'God of War' has a few fighting game-style moments, it is predominantly of the action-adventure, hack-and-slash genre.", u: "https://i.imgur.com/0Iu1aqf.gif" }
     /*
         6: { q: "", c1: "", c2: "", c3: "", c4: "", a: 1 },
         7: { q: "", c1: "", c2: "", c3: "", c4: "", a: 1 },
@@ -16,7 +16,7 @@ var qa = { // 'Array-like' object. Key is question #; value is correct answer #.
 };
 
 var assess = {
-    0: { as: "You are what they call a 'n00b'. (Yes, it is spelled with zeroes.)  It's okay - you don't know games but at least you have real friends... right?  RIGHT???", u: "https://media.giphy.com/media/YLgIOmtIMUACY/giphy.gif" },
+    0: { as: "You are what they call a 'n00b'. (Yes, spelled with zeroes.)  It's okay - you don't know games but at least you have real friends... right?  RIGHT???", u: "https://media.giphy.com/media/YLgIOmtIMUACY/giphy.gif" },
     1: { as: "Hardly a gamer. Stick to your Candy Crush, my friend...", u: "http://66.media.tumblr.com/f5137339a16ed43cd0f983fc9bb66750/tumblr_mgvwgbX95Y1s2gj18o1_r2_500.gif" },
     2: { as: "You're a casual gamer, but take heart! A few overnight gaming sessions should get you there.", u: "http://66.media.tumblr.com/f5137339a16ed43cd0f983fc9bb66750/tumblr_mgvwgbX95Y1s2gj18o1_r2_500.gif" },
     3: { as: "I see you've twirled a fair share of joysticks before. You maintain a good game-life balance. ", u: "https://media.giphy.com/media/wPVThWJ0EX9oA/giphy.gif" },
@@ -24,13 +24,11 @@ var assess = {
     5: { as: "ALL HAIL GAMING KING! You're so good at this that South Koreans are prepping your honorary citizenship. Now go open a window or something, you total otaku.", u: "https://media.giphy.com/media/3o7WTDhY6SMw36LWve/giphy.gif" }
 };
 
-var clockRunning = false; // This prevents excessively timer speedup.
-var timerId; // This will hold setTimeout.
-var time; // # of seconds left on the timer.
-var current = 0; // This keeps track of question #.
-
+var clockRunning = false; // Prevents excessive timer speedup.
+var timerId; // Holds setTimeout.
+var time; // # of seconds left on timer.
+var current = 0; // Current question #.
 var correct = 0; // # of correct answers.
-var incorrect = 0; // # of incorrect answers.
 
 
 //----------------//
@@ -65,9 +63,7 @@ $(document).ready(function () {
                     time = time - 1;
                     $('#countdown').text(time);
                 }
-                else { // If time is up, show answer.
-                    showAnswer();
-                }
+                else { showAnswer() }; // If time is up, show answer.
             }, 1000);
         }
     }; // End start function.
@@ -82,7 +78,7 @@ $(document).ready(function () {
 
     // Call this to reset timer.
     function reset() {
-        time = 2;
+        time = 10;
         $('#countdown').text(time);
     }; // End reset function.
 
@@ -95,16 +91,14 @@ $(document).ready(function () {
             $('#question').text(qa[current]['q']); // Update question text.
 
             Object.keys(qa).forEach(function (key) { // Loop through qa keys.
-
                 for (let i = 1; i <= 4; i++) { // Loop to update 4 button texts.
                     $('#' + i).text(qa[current]["c" + i]);
                 } // End loop for button update.
-
             }); // End loop thru object keys.
+
             reset(); // Reset timer.
             start(); // Resume timer.
         } else { summary() }; // If out of questions, summarize results.
-
     }; // End next function.
 
 
@@ -123,30 +117,21 @@ $(document).ready(function () {
 
         $(pic).attr('src', qa[current]['u']); // Update img src.
         $(desc).text(qa[current]['exp']); // Update explanation.
-    };
+    }; // End showAnswer function.
 
 
-    // Call this to summarize game result.
+    // Call this to summarize game results.
     function summary() {
-        $(eval).text('You got ' + correct + ' out of ' + Object.keys(qa).length + 'questions.');
-
-        var rank = Math.floor(correct / (Object.keys(qa).length)) / 2; // Rank user on 0-5 scale.
+        $(eval).text('You got ' + correct + ' out of ' + Object.keys(qa).length + ' questions.');
+        var rank = Math.floor(correct / (Object.keys(qa).length) * 5); // Rank user on 0-5 scale.
 
         $(pic).attr('src', assess[rank].u); // Update display using assess object.
         $(desc).text(assess[rank].as);
 
-        $(resBtn).attr('display', 'block'); // Unhide restart button
-    };
+        resBtn.style.display = 'block'; // Unhide restart button
+        modal.style.display = "block"; // Open the modal.
+    }; // End summary function.
 
-
-    // Call this to restart game.
-    function restart() {
-        current = 0;
-        time = 10;
-        correct = 0;
-        incorrect = 0;
-        next();
-    }
 
     //----------------//
     // EVENT HANDLERS //
@@ -165,18 +150,28 @@ $(document).ready(function () {
         showAnswer(this.id);
     });
 
+    // Call this to restart game.
+    $(resBtn).click(function () {
+        resBtn.style.display = 'none'; // Hide button
+        modal.style.display = 'none'; // Hide modal
+        current = 0;
+        time = 10;
+        correct = 0;
+        next();
+    });
+
 
     // When the user clicks on <span> (x), close the modal.
     close.onclick = function () {
-        modal.style.display = "none";
+        modal.style.display = 'none';
         next();
-    }
+    };
 
 
     // When the user clicks anywhere outside of the modal, close it and advance to next trivia.
     window.onclick = function (event) {
         if (event.target == modal) {
-            modal.style.display = "none";
+            modal.style.display = 'none';
             next();
         }
     }
@@ -184,6 +179,16 @@ $(document).ready(function () {
 });
 
 /*
+Improvements planned
+- Implement setTimeout auto-close on evaluate view.
+- Adjust size of close button on evaluate view. Too wide.
+- Apply more styling. (background image, button animation on hover, Bootstrap progress bar, modal too low on desktop view, )
+- Hide modal close box in summary view. Maybe even ignore all modal close attempts on click event level.
+- Add more trivia Q&A.
+- Consider adopting BS jumbotron or carousel for display.
+- Impose synchronousity in gif loading.
+
+-----------
 References
 
 Enumerating through object
