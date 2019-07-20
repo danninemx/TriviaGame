@@ -1,18 +1,28 @@
-/* GLOBAL VARIABLES */
+//------------------//
+// GLOBAL VARIABLES //
+//------------------//
 var qa = { // 'Array-like' object. Key is question #; value is correct answer #.
     1: { q: "Master Chief is the hero of which game franchise?", c1: "Halo", c2: "ARMA", c3: "Doom", c4: "Gears of War", a: 1, exp: "Hail to the Chief!", u: "https://static.comicvine.com/uploads/original/11111/111118857/4086055-3738604848-40860.gif" },
     2: { q: "Which game was inspired by the WarCraft lore?", c1: "StarCraft", c2: "Hearthstone", c3: "WarHammer 2000", c4: "Golden Axe", a: 2, exp: "WarCraft lore had spawned multiple WarCraft games, an MMO as well as board games such as Hearthstone.", u: "https://media.giphy.com/media/mqovvJMv4gf1C/giphy.gif" },
     3: { q: "Hero of which game does not speak once in the game?", c1: "Super Mario 64", c2: "Sonic the Hedgehog 2006", c3: "", c4: "Grand Theft Auto 3", a: 4, exp: "GTA3 is famous for its silent, nameless protagonist. Poor 'guy'.", u: "https://thegtaplace.com/images/gta3/screenshots/xbox/full_gta3_01.jpg" },
-    4: { q: "In which game can you NOT attack enemies by 'stomping'?", c1: "Super Mario Bros", c2: "Sonic the Hedgehog", c3: "Mega Man X", c4: "Duck Tales", a: 3, exp: "There's a reason Mega Man has a blaster for an arm!" },
-    5: { q: "Which of the following is not of the fighting game genre?", c1: "God of War", c2: "M.U.G.E.N", c3: "Tekken", c4: "Dead or Alive", a: 1, exp: "While 'God of War' has a few fighting game-style moments, but it is of the action-adventure, hack-and-slash genre." },
+    4: { q: "In which game can you NOT attack enemies by 'stomping'?", c1: "Super Mario Bros", c2: "Sonic the Hedgehog", c3: "Mega Man X", c4: "Duck Tales", a: 3, exp: "There's a reason Mega Man has a blaster for an arm!", u: "https://media.giphy.com/media/YRshqyFl4ya5lZbDnM/giphy.gif" },
+    5: { q: "Which of the following is not of the fighting game genre?", c1: "God of War", c2: "M.U.G.E.N", c3: "Tekken", c4: "Dead or Alive", a: 1, exp: "While 'God of War' has a few fighting game-style moments, but it is of the action-adventure, hack-and-slash genre.", u: "https://i.imgur.com/0Iu1aqf.gif" }
     /*
-        5: { q: "", c1: "", c2: "", c3: "", c4: "", a: 1 },
         6: { q: "", c1: "", c2: "", c3: "", c4: "", a: 1 },
         7: { q: "", c1: "", c2: "", c3: "", c4: "", a: 1 },
         8: { q: "", c1: "", c2: "", c3: "", c4: "", a: 1 },
         9: { q: "", c1: "", c2: "", c3: "", c4: "", a: 1 } 
         */
 };
+
+var clockRunning = false; // This prevents excessively timer speedup.
+var timerId; // This will hold setTimeout.
+var time; // # of seconds left on the timer.
+var current = 0; // This keeps track of question #.
+
+var correct = 0; // # of correct answers.
+var incorrect = 0; // # of incorrect answers.
+
 
 //----------------//
 // DOM references //
@@ -27,21 +37,14 @@ var close = document.getElementsByClassName("close")[0]; // Get the <span> eleme
 var eval = document.getElementById("modal-title"); // Answer evaluation display
 var pic = document.getElementById("picture"); // Picture for answer key
 var desc = document.getElementById("explanation"); // Explanation of answer
-
-var clockRunning = false; // This prevents excessively timer speedup.
-var timerId; // This will hold setTimeout.
-var time; // # of seconds left on the timer.
-var current = 0; // This keeps track of question #.
-
-var correct = 0;
-var incorrect = 0;
+var resBtn = document.getElementById("restart"); // Restart button
 
 
 
 $(document).ready(function () {
 
     //----------------//
-    //    Functions   //
+    //    FUNCTIONS   //
     //----------------//
 
     // Call this to start timer.
@@ -99,13 +102,10 @@ $(document).ready(function () {
         pause(); // Stop timer while modal is on.
         modal.style.display = "block"; // Open the answer modal.
 
-        var corr = qa[current]['a']; // Check qa for correct answer #.
-        //console.log("pressed btn #" + ansNum + " and type is " + (typeof ansNum));
-        //console.log("corr is " + corr + " and type is " + (typeof corr)); // correct answer key checker
-        debugger;
-        if (parseInt(ansNum) === corr) { // Turn button id to int, compare vs answer #, then display.
+        var corr = qa[current]['a']; // Check correct answer # for current question.
+        if (parseInt(ansNum) === corr) { // Turn button id to int, compare vs answer #, update display if correct.
             $(eval).text('Correct!');
-        } else if (time = 0) {
+        } else if (time === 0) {
             $(eval).text("Time's up!");
         } else { $(eval).text('Wrong...') }; // This condition includes (ansNum === undefined).
 
@@ -114,6 +114,20 @@ $(document).ready(function () {
     };
 
 
+    // Call this to summarize game result.
+    function summary() {
+        //    $(eval).
+    };
+
+
+    // Call this to restart game.
+    function restart() {
+        current = 0;
+        time = 10;
+        correct = 0;
+        incorrect = 0;
+        next();
+    }
 
     //----------------//
     // EVENT HANDLERS //

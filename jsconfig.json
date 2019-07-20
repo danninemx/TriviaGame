@@ -1,0 +1,7 @@
+// This file exists to provide jQuery intellisense as per:
+// https://stackoverflow.com/questions/41777327/jquery-intellisense-in-vs-code
+{
+  "typeAcquisition": {
+    "include": ["jquery"]
+  }
+}
