@@ -19,7 +19,7 @@ body {
   text-align: left;
 }
 
-button {
+.select {
   width: 100%;
 
   /* Box-model */
@@ -52,6 +52,10 @@ button {
   padding: 20px;
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
+}
+
+#modal-timer {
+  display: none;
 }
 
 /* The Close Button */

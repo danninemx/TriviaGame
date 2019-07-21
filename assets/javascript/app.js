@@ -27,6 +27,7 @@ var clockRunning = false; // Prevents excessive timer speedup.
 var timerId; // Holds setInterval for Q&A.
 var modaltimerId; // Holds setInterval for modal.
 var time; // # of seconds left on timer.
+var modalTime; // # of seconds left on modal timer. 
 var current = 0; // Current question #.
 var correct = 0; // # of correct answers.
 
@@ -40,6 +41,7 @@ var btn3 = document.getElementById("3");
 var btn4 = document.getElementById("4");
 
 var modal = document.getElementById("myModal"); //  the modal
+var modalTimer = document.getElementById("modal-timer"); // modal timer
 var close = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
 var eval = document.getElementById("modal-title"); // Answer evaluation display
 var pic = document.getElementById("picture"); // Picture for answer key
@@ -47,6 +49,11 @@ var modalCount = document.getElementById("modal-countdown"); // Span showing sec
 var desc = document.getElementById("explanation"); // Explanation of answer
 var resBtn = document.getElementById("restart"); // Restart button
 
+
+//test function
+function pauseModal() {
+    clearInterval(modaltimerId);
+};
 
 
 $(document).ready(function () {
@@ -86,27 +93,28 @@ $(document).ready(function () {
 
     // Call this to progress to next question. If n/a, call summary.
     function next() {
-        current++; // Next question number.
-
-        if (current <= Object.keys(qa).length) { // If other questions remain...
+        if (current < Object.keys(qa).length) { // If other questions remain...
+            current++; // Next question number.
             $('#question').text(qa[current]['q']); // Update question text.
 
-            Object.keys(qa).forEach(function (key) { // Loop through qa keys.
-                for (let i = 1; i <= 4; i++) { // Loop to update 4 button texts.
+            Object.keys(qa).forEach(function (key) { // Loop through qa keys & update choice buttons.
+                for (let i = 1; i <= 4; i++) {
                     $('#' + i).text(qa[current]["c" + i]);
-                } // End loop for button update.
+                }
             }); // End loop thru object keys.
 
             reset(); // Reset timer.
             start(); // Resume timer.
+
         } else { summary() }; // If out of questions, summarize results.
     }; // End next function.
 
 
     // Call this to pause and show answer.
     function showAnswer(ansNum) {
-        pause(); // Stop timer while modal is on.
-        modal.style.display = "block"; // Open the answer modal.
+        pause(); // Stop game timer while modal is on.
+        modal.style.display = 'block'; // Open explanation modal.
+        modalTimer.style.display = 'block'; // Unhide modal timer.
 
         var corr = qa[current]['a']; // Check correct answer # for current question.
         if (parseInt(ansNum) === corr) { // Turn button id to int, compare vs answer #, update display if correct.
@@ -119,13 +127,13 @@ $(document).ready(function () {
         $(pic).attr('src', qa[current]['u']); // Update img src.
         $(desc).text(qa[current]['exp']); // Update explanation.
 
-        // Auto-close explanation modal with timer.
-        var modalTime = 3;
+        // Auto-close explanation modal with new timer.
+        modalTime = 10;
         if (modal.style.display === 'block') {
 
             modaltimerId = setInterval(function () {
                 modalTime -= 1;
-                $('#modal-countdown').text(modalTime);
+                $(modalCount).text(modalTime);
                 if (modalTime === 0) { // If modal timer is up, remove interval, close modal & next.
                     clearInterval(modaltimerId);
                     modal.style.display = 'none';
@@ -140,7 +148,8 @@ $(document).ready(function () {
 
     // Call this to summarize game results.
     function summary() {
-        $('#modal-timer').style.display = 'none'; // Hide modal timer.
+        modalTimer.style.display = 'none'; // Hide modal timer.
+
         $(eval).text('You got ' + correct + ' out of ' + Object.keys(qa).length + ' questions.');
         var rank = Math.floor(correct / (Object.keys(qa).length) * 5); // Rank user on 0-5 scale.
 
@@ -184,6 +193,7 @@ $(document).ready(function () {
     // When the user clicks on <span> (x), close the modal.
     close.onclick = function () {
         modal.style.display = 'none';
+        clearInterval(modaltimerId); // Clear any modal timer.
         next();
     };
 
@@ -192,6 +202,7 @@ $(document).ready(function () {
     window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = 'none';
+            clearInterval(modaltimerId); // Clear any modal timer.
             next();
         }
     }
