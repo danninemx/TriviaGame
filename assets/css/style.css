@@ -4,7 +4,8 @@ body {
 
 #wrapper {
   /* Box-model */
-  width: 630px;
+  width: 630px; /* This size works well in large.
+  Consider options for small screens. */
 
   /* Positioning */
   margin: 50px auto 0;
@@ -28,7 +29,7 @@ body {
 }
 
 #restart {
-  display: none; /* start out hidden */
+  display: none;
 }
 
 /* The Modal (background) */
@@ -48,10 +49,26 @@ body {
 /* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 10% auto; /* Revised for 4 side. Originally 15% all around and centered */
   padding: 20px;
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
+}
+/* a hack to consider
+.modal-content::before { 
+  content: "";
+  height: 10%;
+  min-height: 5vh;
+  max-height: 10vh;
+} */
+.modal-header {
+  align-items: baseline;
+}
+#modal-title {
+  flex: 1 0 auto;
+}
+#modal-timer {
+  flex: 1 0 auto;
 }
 
 #modal-timer {
