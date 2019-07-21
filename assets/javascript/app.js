@@ -6,13 +6,12 @@ var qa = { // 'Array-like' object. Key is question #; value is correct answer #.
     2: { q: "Which game was inspired by the WarCraft lore?", c1: "StarCraft", c2: "Hearthstone", c3: "WarHammer 2000", c4: "Golden Axe", a: 2, exp: "WarCraft lore had spawned multiple WarCraft games, an MMO as well as board games such as Hearthstone.", u: "https://media.giphy.com/media/mqovvJMv4gf1C/giphy.gif" },
     3: { q: "Hero of which game does not speak once in the game?", c1: "Super Mario 64", c2: "Sonic the Hedgehog 2006", c3: "Hitman 2: Silent Assassin", c4: "Grand Theft Auto 3", a: 4, exp: "GTA3 is famous for its silent, nameless protagonist. Poor 'guy'.", u: "https://thegtaplace.com/images/gta3/screenshots/xbox/full_gta3_01.jpg" },
     4: { q: "In which game can you NOT attack enemies by 'stomping'?", c1: "Super Mario Bros", c2: "Sonic the Hedgehog", c3: "Mega Man X", c4: "Duck Tales", a: 3, exp: "There's a reason Mega Man has a blaster for an arm!", u: "https://media.giphy.com/media/YRshqyFl4ya5lZbDnM/giphy.gif" },
-    5: { q: "Which of the following is not of the fighting game genre?", c1: "God of War", c2: "M.U.G.E.N", c3: "Tekken", c4: "Dead or Alive", a: 1, exp: "While 'God of War' has a few fighting game-style moments, it is predominantly of the action-adventure, hack-and-slash genre.", u: "https://i.imgur.com/0Iu1aqf.gif" }
-    /*
-        6: { q: "", c1: "", c2: "", c3: "", c4: "", a: 1 },
-        7: { q: "", c1: "", c2: "", c3: "", c4: "", a: 1 },
-        8: { q: "", c1: "", c2: "", c3: "", c4: "", a: 1 },
-        9: { q: "", c1: "", c2: "", c3: "", c4: "", a: 1 } 
-        */
+    5: { q: "Which of the following is not of the fighting game genre?", c1: "God of War", c2: "M.U.G.E.N", c3: "Tekken", c4: "Dead or Alive", a: 1, exp: "While 'God of War' has a few fighting game-style moments, it is predominantly of the action-adventure, hack-and-slash genre.", u: "https://i.imgur.com/0Iu1aqf.gif" },
+    6: { q: "What's the color of Pacman in Pacman256?", c1: "Yellow", c2: "Red", c3: "Neapolitan", c4: "256-color swirl", a: 1, exp: "Trick question. Of course, Pacman is always yellow.", u: "https://i.kinja-img.com/gawker-media/image/upload/q0qqjj1qlsykkrg8irgx.gif" },
+    7: { q: "Who is NOT one of the protagonists of Grand Theft Auto V?", c1: "Michael De Santa", c2: "Franklin Clinton", c3: "Niko Bellic", c4: "Trevor Philips", a: 3, exp: "Niko Bellic is the hero of Grand Theft Auto 4.", u: "https://gamingbolt.com/wp-content/uploads/2012/12/gta-5-characters.jpg" },
+    8: { q: "In the world of Super Mario, what type of being is Toad?", c1: "Dragon", c2: "Mushroom", c3: "Turtle", c4: "Toad", a: 2, exp: "A toad is a toad is a toad... except when we're talking about the Mario character, who is a humanoid mushroom.", u: "https://media.giphy.com/media/sYDlrOh2wxW4E/giphy.gif" },
+    9: { q: "Which was Nintendo's first portable, interchangeable cartridge handheld?", c1: "NES", c2: "Virtual Boy", c3: "Lynx", c4: "Game Boy", a: 4, exp: "First released in 1989, Game Boy was the first Nintendo mobile console that implemented the 'pack' system.", u: "http://giphygifs.s3.amazonaws.com/media/ApWCNOOIDMPpS/giphy.gif" },
+    10: { q: "Which of these classic game developers did not originate from Japan?", c1: "Konami", c2: "SEGA", c3: "Atari", c4: "Nintendo", a: 3, exp: "In spite of using a Japanese word in its name, Atari was very much of American origin.", u: "https://media.giphy.com/media/14hSMaCp5HRlNC/giphy.gif" }
 };
 
 var assess = {
@@ -123,7 +122,7 @@ $(document).ready(function () {
         // Auto-close explanation modal with timer.
         var modalTime = 3;
         if (modal.style.display === 'block') {
-            debugger;
+
             modaltimerId = setInterval(function () {
                 modalTime -= 1;
                 $('#modal-countdown').text(modalTime);
@@ -141,7 +140,7 @@ $(document).ready(function () {
 
     // Call this to summarize game results.
     function summary() {
-        $('#remaining').style.display = 'none'; // Hide modal timer.
+        $('#modal-timer').style.display = 'none'; // Hide modal timer.
         $(eval).text('You got ' + correct + ' out of ' + Object.keys(qa).length + ' questions.');
         var rank = Math.floor(correct / (Object.keys(qa).length) * 5); // Rank user on 0-5 scale.
 
