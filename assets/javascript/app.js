@@ -101,6 +101,16 @@ $(document).ready(function () {
     }; // End reset function.
 
 
+    // Call this to reset game.
+    function gameReset() {
+        resBtn.style.display = 'none'; // Hide restart button
+        modalTimer.style.display = 'block'; // Un-hide modal timer
+        modal.style.display = 'none'; // Hide modal
+        current = 0;
+        time = 10;
+        correct = 0;
+    }
+
     // Call this to progress to next question. If n/a, call summary.
     function next() {
         if (current < Object.keys(qa).length) { // If other questions remain...
@@ -183,36 +193,37 @@ $(document).ready(function () {
     // EVENT HANDLERS //
     //----------------//
 
-    // Start game: Pressing button hides it and shows previously hidden elements.
+    // Pressing button hides it and reveals ingame elements.
     $('#startGame').click(function () {
         $('#ingame').css('display', 'block');
         $(this).css('display', 'none');
         next();
     });
 
-    // Call this when choice button is clicked.
+    // Clicking choice button passes its HTML id for processing.
     $(".select").click(function () {
-        console.log(this.id); // check if id is gotten
         showAnswer(this.id);
     });
 
-    // Call this to restart game.
+    // Clicking restart button to resets stats and begins new round.
     $(resBtn).click(function () {
-        resBtn.style.display = 'none'; // Hide button
-        modalTimer.style.display = 'block'; // Un-hide modal timer
-        modal.style.display = 'none'; // Hide modal
-        current = 0;
-        time = 10;
-        correct = 0;
+        gameReset();
         next();
     });
 
 
-    // When the user clicks on <span> (x), close the modal.
+    // Clicking on <span> (x), close the modal if game is in progress, otherwise return to start screen.
     close.onclick = function () {
-        modal.style.display = 'none';
-        clearInterval(modaltimerId); // Clear any modal timer.
-        next();
+        if (current < Object.keys(qa).length) {
+            modal.style.display = 'none';
+            clearInterval(modaltimerId); // Clear any modal timer.
+            next();
+        }
+        else {
+            gameReset();
+            $('#ingame').css('display', 'none');
+            $('#startGame').css('display', 'block');
+        };
     };
 
 
