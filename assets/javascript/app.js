@@ -169,14 +169,15 @@ $(document).ready(function () {
     }; // End summary function.
 
 
-    // Call this to update progress bar.
+    // Call this to update progress bar w percentages.
     function progress() {
-/*        var corr = Math.round((correct / Object.keys(qa).length) * 100);
-        var inco = Math.round((current - correct) / Object.keys(qa).length * 100);
-
-        bar.setAttribute('style', ('width:' + prog + "%"));
-        $(bar).text(prog + "%");
-    */    }; // End progress function.
+        var corr = Math.round((correct / Object.keys(qa).length) * 100);
+        var inco = Math.round((current - 1 - correct) / Object.keys(qa).length * 100);
+        var curr = ((current / Object.keys(qa).length * 100) - corr - inco);
+        $(corrbar).attr('style', ('width:' + corr + "%")).text(corr + "%");
+        $(incobar).attr('style', ('width:' + inco + "%")).text(inco + "%");
+        $(bar).attr('style', ('width:' + curr + "%")).text(curr + "%");
+    }; // End progress function.
 
     //----------------//
     // EVENT HANDLERS //
@@ -198,8 +199,8 @@ $(document).ready(function () {
     // Call this to restart game.
     $(resBtn).click(function () {
         resBtn.style.display = 'none'; // Hide button
+        modalTimer.style.display = 'block'; // Un-hide modal timer
         modal.style.display = 'none'; // Hide modal
-        $('#remaining').style.display = 'block'; // Un-hide modal timer
         current = 0;
         time = 10;
         correct = 0;
