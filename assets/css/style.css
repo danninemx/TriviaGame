@@ -2,7 +2,7 @@ body::after {
   /* Opaque background image */
   content: "";
   background: url(https://overmental.com/wp-content/uploads/2015/03/23d2bdb3-ae78-40a4-b4e1-fbd17ce2395b.png);
-  opacity: 0.2;
+  opacity: 0.1;
   top: 0;
   left: 0;
   bottom: 0;
@@ -13,7 +13,7 @@ body::after {
 
 #wrapper {
   /* Box-model */
-  width: 70%; /* 630px works well in large.
+  width: 60%; /* 630px works well in large.
   Consider options for smaller screens. */
 
   /* Positioning */
@@ -21,7 +21,7 @@ body::after {
 }
 
 #jumbo {
-  animation: fadein 3s;
+  animation: fadein 2s;
 }
 
 @keyframes fadein {
@@ -40,14 +40,27 @@ body::after {
 #buttons {
   /* Typography */
   text-align: left;
+  margin-bottom: 10%;
 }
 
 .select {
-  width: 100%;
-
   /* Box-model */
+  width: 100%;
   height: 50px;
-  margin: 0 0 2%;
+
+  background-color: #ddd;
+  border: none;
+  color: black;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 0 10px; /* formerly margin: 0 0 2% */
+  transition: 0.3s;
+}
+
+.select:hover {
+  background-color: #3e8e41;
+  color: white;
 }
 
 #restart {
