@@ -116,11 +116,11 @@ $(document).ready(function () {
 
     // Call this to progress to next question. If n/a, call summary.
     function next() {
-        if (current < Object.keys(qa).length) { // If other questions remain...
-            current++; // Next question number.
+        current++; // Next question number.
+        if (current <= Object.keys(qa).length) { // If other questions remain...
             $('#question').text(qa[current]['q']); // Update question text.
 
-            Object.keys(qa).forEach(function (key) { // Loop through qa keys & update choice buttons.
+            Object.keys(qa).forEach(function (key) { // Loop through qa & update choice buttons.
                 for (let i = 1; i <= 4; i++) {
                     $('#' + i).text(qa[current]["c" + i]);
                 }
@@ -154,7 +154,7 @@ $(document).ready(function () {
         $(desc).text(qa[current]['exp']);
 
         // Auto-close explanation modal with new timer.
-        modalTime = 10;
+        modalTime = 15;
         if (modal.style.display === 'block') {
             modaltimerId = setInterval(function () {
                 modalTime -= 1;
@@ -220,7 +220,7 @@ $(document).ready(function () {
 
     // Clicking on <span> (x), close the modal if game is in progress, otherwise return to start screen.
     close.onclick = function () {
-        if (current < Object.keys(qa).length) {
+        if (current <= Object.keys(qa).length) {
             modal.style.display = 'none';
             clearInterval(modaltimerId); // Clear any modal timer.
             next();

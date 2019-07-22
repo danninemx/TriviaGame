@@ -2,7 +2,7 @@ body::after {
   /* Opaque background image */
   content: "";
   background: url(https://overmental.com/wp-content/uploads/2015/03/23d2bdb3-ae78-40a4-b4e1-fbd17ce2395b.png);
-  opacity: 0.5;
+  opacity: 0.2;
   top: 0;
   left: 0;
   bottom: 0;
@@ -13,13 +13,17 @@ body::after {
 
 #wrapper {
   /* Box-model */
-  width: 630px; /* This size works well in large.
-  Consider options for small screens. */
+  width: 70%; /* 630px works well in large.
+  Consider options for smaller screens. */
 
   /* Positioning */
   margin: 50px auto 0;
 }
-
+/*
+#jumbo {
+  background-image: none;
+}
+*/
 #ingame {
   display: none;
 }
@@ -54,7 +58,7 @@ body::after {
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
+  overflow: auto; /*Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
@@ -62,10 +66,10 @@ body::after {
 /* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
-  margin: 10% auto; /* Revised for 4 side. Originally 15% all around and centered */
-  padding: 20px;
+  margin: 5% auto; /* Revised for 4 side. Originally 15% all around and centered */
+  padding: 10px; /* down from 20px */
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 50%; /* Could be more or less, depending on screen size */
 }
 /* a hack to consider
 .modal-content::before { 
