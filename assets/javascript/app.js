@@ -49,7 +49,9 @@ var modalTimer = document.getElementById("modal-timer"); // modal timer
 var modalCount = document.getElementById("modal-countdown"); // Span showing seconds left on modal timer
 var close = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
 var pic = document.getElementById("picture"); // Picture for answer key
-var desc = document.getElementById("explanation"); // Explanation of answer
+var ans = document.getElementById("answer"); // Display for answer key
+var ansKey = document.getElementById('answerKey'); // Span for answer key
+var desc = document.getElementById("explanation"); // Explanation of answer key
 
 /* PROGRESS BAR */
 var corrbar = document.getElementById("corrBar"); // progress bar portion for correct answers
@@ -105,6 +107,7 @@ $(document).ready(function () {
     function gameReset() {
         resBtn.style.display = 'none'; // Hide restart button
         modalTimer.style.display = 'block'; // Un-hide modal timer
+        ans.style.display = 'block'; // Un-hide answer key display
         modal.style.display = 'none'; // Hide modal
         current = 0;
         time = 10;
@@ -137,16 +140,18 @@ $(document).ready(function () {
         modal.style.display = 'block'; // Open explanation modal.
         modalTimer.style.display = 'block'; // Unhide modal timer.
 
-        var corr = qa[current]['a']; // Check correct answer # for current question.
+        var corr = qa[current]['a']; // Get correct answer # for current question.
         if (parseInt(ansNum) === corr) { // Turn button id to int, compare vs answer #, update display if correct.
             correct++;
             $(eval).text('Correct!');
         } else if (time === 0) {
             $(eval).text("Time's up!");
-        } else { $(eval).text('Wrong...') }; // This condition includes (ansNum === undefined).
+        } else { $(eval).text('Wrong...') };
 
-        $(pic).attr('src', qa[current]['u']); // Update img src.
-        $(desc).text(qa[current]['exp']); // Update explanation.
+        // Update image, answer key and explanation in modal.
+        $(pic).attr('src', qa[current]['u']);
+        $(ansKey).text(qa[current]['c' + qa[current]['a']]);
+        $(desc).text(qa[current]['exp']);
 
         // Auto-close explanation modal with new timer.
         modalTime = 10;
@@ -167,6 +172,7 @@ $(document).ready(function () {
     // Call this to summarize game results.
     function summary() {
         modalTimer.style.display = 'none'; // Hide modal timer.
+        ans.style.display = 'none'; // Hide answer key display.
 
         $(eval).text('You got ' + correct + ' out of ' + Object.keys(qa).length + ' questions.');
         var rank = Math.floor(correct / (Object.keys(qa).length) * 5); // Rank user on 0-5 scale.
@@ -188,6 +194,7 @@ $(document).ready(function () {
         $(incobar).attr('style', ('width:' + inco + "%")).text(inco + "%");
         $(bar).attr('style', ('width:' + curr + "%")).text(curr + "%");
     }; // End progress function.
+
 
     //----------------//
     // EVENT HANDLERS //
@@ -211,7 +218,6 @@ $(document).ready(function () {
         next();
     });
 
-
     // Clicking on <span> (x), close the modal if game is in progress, otherwise return to start screen.
     close.onclick = function () {
         if (current < Object.keys(qa).length) {
@@ -226,7 +232,6 @@ $(document).ready(function () {
         };
     };
 
-
     // When the user clicks anywhere outside of the modal, close it and advance to next trivia.
     window.onclick = function (event) {
         if (event.target == modal) {
@@ -240,12 +245,8 @@ $(document).ready(function () {
 
 /*
 Potential improvements
-- Progress bar function
-- Apply more styling. (background image, button animation on hover, Bootstrap progress bar, modal too low on desktop view, modal animation)
-- Consider adopting BS jumbotron or carousel for display.
 - Make view responsive. Not great on small sizes.
 - Add Readme.md
-- Impose synchronousity in gif loading.
 
 -----------
 References

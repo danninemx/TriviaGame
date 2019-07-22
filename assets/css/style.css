@@ -1,7 +1,5 @@
-/*body {
-}
-*/
 body::after {
+  /* Opaque background image */
   content: "";
   background: url(https://overmental.com/wp-content/uploads/2015/03/23d2bdb3-ae78-40a4-b4e1-fbd17ce2395b.png);
   opacity: 0.5;
