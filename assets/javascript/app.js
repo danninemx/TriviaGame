@@ -62,12 +62,6 @@ var bar = document.getElementById("progBar"); // full progress bar
 var resBtn = document.getElementById("restart"); // Restart button
 
 
-//test function modal timer
-function pauseModal() {
-    clearInterval(modaltimerId);
-};
-
-
 $(document).ready(function () {
 
     //----------------//
@@ -200,8 +194,9 @@ $(document).ready(function () {
     // EVENT HANDLERS //
     //----------------//
 
-    // Pressing button hides it and reveals ingame elements.
+    // Pressing button hides itself & jumbotron and reveals ingame elements.
     $('#startGame').click(function () {
+        $('#jumbo').css('display', 'none');
         $('#ingame').css('display', 'block');
         $(this).css('display', 'none');
         next();
@@ -227,6 +222,7 @@ $(document).ready(function () {
         }
         else {
             gameReset();
+            $('#jumbo').css('display', 'block');
             $('#ingame').css('display', 'none');
             $('#startGame').css('display', 'block');
         };
