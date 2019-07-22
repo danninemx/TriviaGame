@@ -74,8 +74,14 @@ $(document).ready(function () {
             clockRunning = true;
             timerId = setInterval(function () { // Count down every 1 sec.
                 if (time > 0) { // If time remains, count down.
-                    time = time - 1;
-                    $('#countdown').text(time);
+                    time -= 1;
+                    if (time <= 3) {
+                        $('#countdown').text(time).css({ 'color': 'red', 'font-weight': "bold" });
+                    }
+                    else if (time <= 5) {
+                        $('#countdown').text(time).css('color', 'red');
+                    }
+                    else { $('#countdown').text(time).css({ 'color': 'black', 'font-weight': "normal" }) };
                 }
                 else { showAnswer() }; // If time is up, show answer.
             }, 1000);

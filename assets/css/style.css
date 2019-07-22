@@ -18,6 +18,8 @@ body::after {
 
 /* jumbotron */
 #jumbo {
+  font-family: "Bungee", cursive;
+
   animation: fadein 2s;
 }
 @keyframes fadein {
@@ -29,8 +31,119 @@ body::after {
   }
 }
 
+#startGame {
+  position: relative;
+  padding: 25px 30px;
+  text-decoration: none;
+  color: royalblue;
+  font-size: 2em;
+  text-transform: uppercase;
+  font-family: "Bungee", cursive, sans-serif;
+  letter-spacing: 4px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+#startGame:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+#startGame:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: 0.5s;
+  transition-delay: 0.5s;
+}
+
+#startGame:hover:after {
+  left: 100%;
+}
+
+#startGame span {
+  position: absolute;
+  display: block;
+  transition: 0.5s ease;
+}
+
+#startGame span:nth-child(1) {
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: blue; /* #fff works better on dark bg */
+}
+
+#startGame:hover span:nth-child(1) {
+  width: 100%;
+  transform: translateX(100%);
+}
+
+#startGame span:nth-child(3) {
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 1px;
+  background: blue;
+}
+
+#startGame:hover span:nth-child(3) {
+  width: 100%;
+  transform: translateX(-100%);
+}
+
+#startGame span:nth-child(2) {
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 0;
+  background: blue;
+}
+
+#startGame:hover span:nth-child(2) {
+  height: 100%;
+  transform: translateY(100%);
+}
+
+#startGame span:nth-child(4) {
+  bottom: 0;
+  right: 0;
+  width: 1px;
+  height: 0;
+  background: blue;
+}
+
+#startGame:hover span:nth-child(4) {
+  width: 100%;
+  transform: translateX(-100%);
+}
+
 #ingame {
   display: none;
+}
+
+#timer {
+  margin-bottom: 5%;
+}
+
+#remaining {
+  font-size: 2em;
 }
 
 #buttons {
@@ -47,9 +160,9 @@ body::after {
   background-color: #ddd;
   border: none;
   color: black;
-  padding: 16px 32px;
+  padding: 16px 0 46px;
   text-align: center;
-  font-size: 16px;
+  font-size: 20px;
   margin: 4px 0 10px; /* formerly margin: 0 0 2% */
   transition: 0.3s;
   border-radius: 12px;
