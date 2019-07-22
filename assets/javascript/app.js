@@ -35,18 +35,28 @@ var correct = 0; // # of correct answers.
 //----------------//
 // DOM references //
 //----------------//
+
+/* BUTTONS */
 var btn1 = document.getElementById("1"); // choice buttons
 var btn2 = document.getElementById("2");
 var btn3 = document.getElementById("3");
 var btn4 = document.getElementById("4");
 
+/* EXPLANATION MODAL */
 var modal = document.getElementById("myModal"); //  the modal
-var modalTimer = document.getElementById("modal-timer"); // modal timer
-var close = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
 var eval = document.getElementById("modal-title"); // Answer evaluation display
-var pic = document.getElementById("picture"); // Picture for answer key
+var modalTimer = document.getElementById("modal-timer"); // modal timer
 var modalCount = document.getElementById("modal-countdown"); // Span showing seconds left on modal timer
+var close = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
+var pic = document.getElementById("picture"); // Picture for answer key
 var desc = document.getElementById("explanation"); // Explanation of answer
+
+/* PROGRESS BAR */
+var corrbar = document.getElementById("corrBar"); // progress bar portion for correct answers
+var incobar = document.getElementById("incoBar"); // progress bar portion for incorrect answers
+var bar = document.getElementById("progBar"); // full progress bar
+
+/* OTHERS */
 var resBtn = document.getElementById("restart"); // Restart button
 
 
@@ -103,6 +113,7 @@ $(document).ready(function () {
                 }
             }); // End loop thru object keys.
 
+            progress(); // Update progress bar.
             reset(); // Reset timer.
             start(); // Resume timer.
 
@@ -160,8 +171,12 @@ $(document).ready(function () {
 
     // Call this to update progress bar.
     function progress() {
+/*        var corr = Math.round((correct / Object.keys(qa).length) * 100);
+        var inco = Math.round((current - correct) / Object.keys(qa).length * 100);
 
-    }; // End progress function.
+        bar.setAttribute('style', ('width:' + prog + "%"));
+        $(bar).text(prog + "%");
+    */    }; // End progress function.
 
     //----------------//
     // EVENT HANDLERS //
@@ -212,7 +227,8 @@ $(document).ready(function () {
 });
 
 /*
-Improvements planned
+Potential improvements
+- Progress bar function
 - Apply more styling. (background image, button animation on hover, Bootstrap progress bar, modal too low on desktop view, modal animation)
 - Consider adopting BS jumbotron or carousel for display.
 - Make view responsive. Not great on small sizes.
