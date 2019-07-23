@@ -6,7 +6,7 @@ var qa = { // 'Array-like' object. Key is question #.
     2: { q: "Which game was based on Blizzard's WarCraft lore?", c1: "StarCraft", c2: "Hearthstone", c3: "WarHammer", c4: "Golden Axe", a: 2, exp: "WarCraft lore had spawned multiple WarCraft games, an MMO as well as board games such as Hearthstone.", u: "https://media.giphy.com/media/mqovvJMv4gf1C/giphy.gif" },
     3: { q: "Hero of which game does not speak once in the game?", c1: "Super Mario 64", c2: "Sonic the Hedgehog 2006", c3: "Hitman 2: Silent Assassin", c4: "Grand Theft Auto 3", a: 4, exp: "GTA3 is famous for its silent, nameless protagonist. Poor 'guy'.", u: "https://thegtaplace.com/images/gta3/screenshots/xbox/full_gta3_01.jpg" },
     4: { q: "In which game can you NOT attack enemies by 'stomping'?", c1: "Super Mario Bros", c2: "Sonic the Hedgehog", c3: "Mega Man X", c4: "Duck Tales", a: 3, exp: "There's a reason Mega Man has a blaster for an arm!", u: "https://media.giphy.com/media/YRshqyFl4ya5lZbDnM/giphy.gif" },
-    5: { q: "Which of the following is not of the fighting game genre?", c1: "God of War", c2: "M.U.G.E.N", c3: "Tekken", c4: "Dead or Alive", a: 1, exp: "While 'God of War' has a few fighting game-style moments, it is predominantly of the action-adventure, hack-and-slash genre.", u: "https://i.imgur.com/0Iu1aqf.gif" },
+    5: { q: "Which of the following is not of the fighting game genre?", c1: "God of War", c2: "M.U.G.E.N", c3: "Tekken", c4: "Dead or Alive", a: 1, exp: "'God of War' has a few fighting game-style moments, it is mainly of the action-adventure, hack-and-slash genre.", u: "https://i.imgur.com/0Iu1aqf.gif" },
     6: { q: "What's the color of Pacman in Pacman256?", c1: "Yellow", c2: "Red", c3: "Neapolitan", c4: "256-color swirl", a: 1, exp: "Trick question. Of course, Pacman is always yellow.", u: "https://i.kinja-img.com/gawker-media/image/upload/q0qqjj1qlsykkrg8irgx.gif" },
     7: { q: "Who is NOT one of the protagonists of Grand Theft Auto V?", c1: "Michael De Santa", c2: "Franklin Clinton", c3: "Niko Bellic", c4: "Trevor Philips", a: 3, exp: "Niko Bellic is the hero of Grand Theft Auto 4.", u: "https://gamingbolt.com/wp-content/uploads/2012/12/gta-5-characters.jpg" },
     8: { q: "In the world of Super Mario, what type of being is Toad?", c1: "Dragon", c2: "Mushroom", c3: "Turtle", c4: "Toad", a: 2, exp: "A toad is a toad is a toad... except when we're talking about the Mario character, who is a humanoid mushroom.", u: "https://media.giphy.com/media/sYDlrOh2wxW4E/giphy.gif" },
@@ -15,12 +15,12 @@ var qa = { // 'Array-like' object. Key is question #.
 };
 
 var assess = { // 'Array-like' object. Key is player rank.
-    0: { as: "You are what they call a 'n00b'. (Yes, spelled with zeroes.)  It's okay - you don't know games but at least you have real friends... right?  RIGHT???", u: "https://media.giphy.com/media/YLgIOmtIMUACY/giphy.gif" },
-    1: { as: "Hardly a gamer. Stick to your Candy Crush, my friend...", u: "http://66.media.tumblr.com/f5137339a16ed43cd0f983fc9bb66750/tumblr_mgvwgbX95Y1s2gj18o1_r2_500.gif" },
-    2: { as: "You're a casual gamer, but take heart! A few overnight gaming sessions should get you there.", u: "http://66.media.tumblr.com/f5137339a16ed43cd0f983fc9bb66750/tumblr_mgvwgbX95Y1s2gj18o1_r2_500.gif" },
-    3: { as: "I see you've twirled a fair share of joysticks before. You maintain a good game-life balance. ", u: "https://media.giphy.com/media/wPVThWJ0EX9oA/giphy.gif" },
-    4: { as: "So close to perfection.  You've proven yourself a gamer.  Congratulations! Now go relax your eyes.", u: "https://media.giphy.com/media/y0NFayaBeiWEU/giphy.gif" },
-    5: { as: "ALL HAIL GAMING KING! You're so good at this that South Koreans are prepping your honorary citizenship. Now go open a window or something, you total otaku.", u: "https://media.giphy.com/media/3o7WTDhY6SMw36LWve/giphy.gif" }
+    0: { as: "You are what they call a 'n00b'. (Yes, spelled with zeroes.) It's okay - you don't know games but at least you have real friends, right? ... RIGHT???", u: "https://media.giphy.com/media/YLgIOmtIMUACY/giphy.gif", au: "https://themushroomkingdom.net/sounds/wav/smw/smw_lost_a_life.wav" },
+    1: { as: "Hardly a gamer. Stick to your Candy Crush, my friend...", u: "http://66.media.tumblr.com/f5137339a16ed43cd0f983fc9bb66750/tumblr_mgvwgbX95Y1s2gj18o1_r2_500.gif", au: "https://themushroomkingdom.net/sounds/wav/smw/smw_game_over.wav" },
+    2: { as: "You're a casual gamer, but take heart! A few overnight gaming sessions should get you there.", u: "http://66.media.tumblr.com/f5137339a16ed43cd0f983fc9bb66750/tumblr_mgvwgbX95Y1s2gj18o1_r2_500.gif", au: "https://themushroomkingdom.net/sounds/wav/smb3/smb3_game_over.wav" },
+    3: { as: "I see you've twirled a fair share of joysticks before. You maintain a good game-life balance. ", u: "https://media.giphy.com/media/wPVThWJ0EX9oA/giphy.gif", au: "https://themushroomkingdom.net/sounds/wav/smb3/smb3_level_clear.wav" },
+    4: { as: "So close to perfection.  You've proven yourself a gamer.  Congratulations! Now go relax your eyes.", u: "https://media.giphy.com/media/y0NFayaBeiWEU/giphy.gif", au: "https://themushroomkingdom.net/sounds/wav/smw/smw_course_clear.wav" },
+    5: { as: "ALL HAIL GAMING KING! You're so good at this that South Koreans are prepping your honorary citizenship. Now go open a window or something, you total otaku.", u: "https://media.giphy.com/media/3o7WTDhY6SMw36LWve/giphy.gif", au: "https://themushroomkingdom.net/sounds/wav/smw/smw_castle_clear.wav" }
 };
 
 var clockRunning = false; // Prevents excessive timer speedup.
@@ -30,6 +30,10 @@ var time; // # of seconds left on timer.
 var modalTime; // # of seconds left on modal timer. 
 var current = 0; // Current question #.
 var correct = 0; // # of correct answers.
+
+var corrSound = new Audio("https://themushroomkingdom.net/sounds/wav/smb3/smb3_1-up.wav");
+var incoSound = new Audio("https://themushroomkingdom.net/sounds/wav/smb2/smb2_bonus_chance_lose.wav");
+var timeSound = new Audio("https://themushroomkingdom.net/sounds/wav/smb/smb_warning.wav")
 
 
 //----------------//
@@ -141,12 +145,17 @@ $(document).ready(function () {
         modalTimer.style.display = 'block'; // Unhide modal timer.
 
         var corr = qa[current]['a']; // Get correct answer # for current question.
-        if (parseInt(ansNum) === corr) { // Turn button id to int, compare vs answer #, update display if correct.
+        if (parseInt(ansNum) === corr) { // Turn button id to int, compare vs answer #, update display & play sound.
+            corrSound.play();
             correct++;
             $(eval).text('Correct!');
         } else if (time === 0) {
+            timeSound.play();
             $(eval).text("Time's up!");
-        } else { $(eval).text('Wrong...') };
+        } else {
+            incoSound.play();
+            $(eval).text('Wrong...')
+        };
 
         // Update image, answer key and explanation in modal.
         $(pic).attr('src', qa[current]['u']);
@@ -177,8 +186,10 @@ $(document).ready(function () {
         $(eval).text('You got ' + correct + ' out of ' + Object.keys(qa).length + ' questions.');
         var rank = Math.floor(correct / (Object.keys(qa).length) * 5); // Rank user on 0-5 scale.
 
-        $(pic).attr('src', assess[rank].u); // Update display using assess object.
+        $(pic).attr('src', assess[rank].u); // Update display using assess object and play sound.
         $(desc).text(assess[rank].as);
+        var endSound = new Audio(assess[rank].au);
+        endSound.play();
 
         resBtn.style.display = 'block'; // Unhide restart button
         modal.style.display = "block"; // Open the modal.
@@ -202,6 +213,9 @@ $(document).ready(function () {
 
     // Pressing button hides itself & jumbotron and reveals ingame elements.
     $('#startGame').click(function () {
+        var startSound = new Audio("http://soundfxcenter.com/video-games/mortal-kombat-deadly-alliance/8d82b5_MKDA_Test_Your_Might_Sound_Effect.mp3");
+        startSound.play();
+
         $('#jumbo').css('display', 'none');
         $('#ingame').css('display', 'block');
         $(this).css('display', 'none');
@@ -234,24 +248,20 @@ $(document).ready(function () {
         };
     };
 
-    // When the user clicks anywhere outside of the modal, close it and advance to next trivia.
+    // When the user clicks outside of the modal, close it and advance to next question.
     window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = 'none';
-            clearInterval(modaltimerId); // Clear any modal timer.
-            next();
+        if (modalTimer.style.display === 'block') {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+                clearInterval(modaltimerId); // Clear any modal timer.
+                next();
+            }
         }
     }
-
 });
 
 /*
-Potential improvements
-- Make view responsive. Not great on small sizes.
-- Add Readme.md
-
------------
-References
+REFERENCE
 
 Enumerating through object
 https://stackoverflow.com/questions/921789/how-to-loop-through-a-plain-javascript-object-with-the-objects-as-members

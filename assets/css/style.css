@@ -26,16 +26,9 @@ body::after {
   font-family: "Bungee", cursive;
   animation: fadein 2s;
 }
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 
 #startGame {
+  animation: fadein 2s;
   position: relative;
   padding: 25px 30px;
   text-decoration: none;
@@ -47,6 +40,15 @@ body::after {
   overflow: hidden;
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 #startGame:before {
